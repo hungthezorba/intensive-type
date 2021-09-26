@@ -5,13 +5,13 @@ function Home() {
 
     return (
         <Grid templateColumns={["repeat(3,1fr)","repeat(7,1fr)"]}>
-            <GridItem display="flex" justifyContent={"flex-end"} flexGrow={1} colSpan={2}>
+            <GridItem display="flex" justifyContent={["flex-start", "flex-start", "flex-end"]} flexGrow={1} colSpan={[1,2]}>
                 <Nav/>
             </GridItem>
-            <GridItem colSpan={3}>
+            <GridItem colSpan={[2,3]}>
                 <p>MAIN</p>
             </GridItem>
-            <GridItem colSpan={2}>
+            <GridItem colSpan={[0,2]}>
                 <p>TRENDINGS</p>    
             </GridItem>           
         </Grid>

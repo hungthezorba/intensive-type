@@ -1,4 +1,4 @@
-import { Box, Text, Flex } from '@chakra-ui/react';
+import {useBreakpointValue, Box, Text, Flex } from '@chakra-ui/react';
 import { ComponentWithAs } from '@chakra-ui/system';
 import { IconProps, Icon } from '@chakra-ui/icon';
 import React from 'react';
@@ -10,15 +10,20 @@ interface INavItem {
 
 function NavItem(props: INavItem) {
 
+    const showText = useBreakpointValue({ sm: false, md: true })
+    
     return (
         <Flex alignItems="center">
             <Box>
                 {props.icon}
             </Box>
-             <Box mr={["16px"]} ml={["20px"]}>
-                <Text fontWeight={400} fontSize={"20px"}>{props.name}</Text>
-            </Box>
-        </Flex>
+            {showText?
+                <Box mr={["16px"]} ml={["20px"]}>
+                    <Text fontWeight={400} fontSize={"20px"}>{props.name}</Text>
+                </Box>
+                : null
+            }
+            </Flex>
     ) 
 }
 
