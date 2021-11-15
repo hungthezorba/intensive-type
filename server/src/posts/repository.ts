@@ -1,10 +1,7 @@
 import { getMongoRepository, MongoRepository } from "typeorm";
 import { Post } from "./entity";
 import {DataSource} from 'apollo-datasource';
-
-interface IPost {
-	content: string
-}
+import { ObjectId } from 'mongodb';
 
 export class PostRepo extends DataSource {
 	repo: MongoRepository<Post>;
@@ -18,7 +15,7 @@ export class PostRepo extends DataSource {
 		return posts
 	}
 
-	async createPost(data: IPost): Promise<Post> {
+	async create(data: {content: string}): Promise<Post> {
 		const post = this.repo.save({
 			content: data.content,
 			retweet: 0,
@@ -28,4 +25,11 @@ export class PostRepo extends DataSource {
 		return post;
 	}
 
+	async increase(data: {id: string, field: string}): Promise<Post> {
+		const post = await this.repo.findOneAndUpdate({
+			_id: new ObjectId(data.id)
+			}, { $inc: {[`${data.field}`]: 1}}, { returnOriginal: false }
+		)
+		return post.value;
+	}
 }

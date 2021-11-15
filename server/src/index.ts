@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import {ApolloServer} from 'apollo-server';
+import {ApolloServerPluginLandingPageGraphQLPlayground} from 'apollo-server-core';
 import { Connection, createConnection } from 'typeorm';
 import {mongoConfig} from './config';
 import { typeDefs, resolvers } from './posts/post';
@@ -24,7 +25,10 @@ const app = async () => {
 			return {
 				postRepo: new PostRepo()
 			}
-		}
+		},
+		plugins: [
+			ApolloServerPluginLandingPageGraphQLPlayground({})
+		]
 	});
  
 	const { url, port } = await server.listen({port: process.env.PORT || 4000});

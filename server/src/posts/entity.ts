@@ -4,7 +4,7 @@ import { ObjectIdColumn, ObjectID, Entity, Column } from "typeorm";
 export class Post {
 
 	@ObjectIdColumn()
-	id: ObjectID;
+	_id: ObjectID;
 
 	@Column()
 	content: string;
@@ -18,8 +18,8 @@ export class Post {
 	@Column()
 	numberOfComments: number;
 
-	constructor(id: ObjectID, content: string, retweet: number, hearts: number, numberOfComments: number ){
-		this.id = id;
+	constructor(_id: ObjectID, content: string, retweet: number, hearts: number, numberOfComments: number ){
+		this._id = _id;
 		this.content = content;
 		this.retweet = retweet;
 		this.hearts = hearts;
